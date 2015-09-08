@@ -4,9 +4,7 @@ This is a 2015 [Data Science for Social Good](http://www.dssg.io) project focuse
 
 
 ## Directories
-+ [`/etl`](etl):  Code used to extract, clean, transform, and load partner data.
 + [`/experiments`](experiments):  Experimental results generated via our data science pipeline.
-+ [`/exploration`](exploration):  Code used to explore data.
 + [`/hspipeline`](hspipeline):  Data science pipeline that generates predictive model output from raw data input.
 + [`/presentations`](presentations):  Presentation material for deep dives, meetups, partner updates, etc.
 + [`/resources`](resources):  Literature and material related to partner districts and project topic.
