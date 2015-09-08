@@ -23,8 +23,9 @@ Starting from a standard AWS install (Ubuntu):
 
 1. Install the [Anaconda Scientific Python Distribution](http://continuum.io/downloads). We did most of our analyses using [Python](https://www.python.org/) using Anaconda, a free enterprise-ready Python distribution for large-scale data processing, predictive analytics, and scientific computing.
 2. Clone this  repository using Git. [Git](http://git-scm.com/) is used version control system we used to orginize our code. We hosted the code on [Github](http://github.com/). You can download Git [here](http://git-scm.com/downloads). Information on getting started with Git is [here](http://git-scm.com/book/en/Getting-Started-Git-Basics). Additionally, you will need to create a Github account. Once you have installed Git, you will need to navigate in command line to the folder in which you want to download the code. Then you will need to clone the respository.
-3. Create a file ```config.yaml``` in the [`/experiments`](experiments) directory that conforms to the provided ```config.yaml.example``` file.
-4. Follow the ```Example.ipynb``` IPython Notebook in the [`/experiments`](experiments) directory.
+3. Navigate in the command line to the base directory of the respository and run ```python setup.py install``` to install the modeling pipeline.
+4. Create a file ```config.yaml``` in the [`/experiments`](experiments) directory that conforms to the provided ```config.yaml.example``` file.
+5. Follow the ```Example.ipynb``` IPython Notebook in the [`/experiments`](experiments) directory.
 
 
 ## Copyright and License
