@@ -1,0 +1,1 @@
+Data science pipeline that generates predictive model output from raw data input. The pipeline is designed to facilitate the development of useful and descriptive models for identifying students who may not finish high school on time, producing scores from input student data.

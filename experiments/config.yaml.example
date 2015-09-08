@@ -1,0 +1,7 @@
+database: 
+  drivername: "dbdriver"
+  host:       "dbhost"
+  port:       "port"
+  username:   "username"
+  password:   "password"
+  database:   "database"

@@ -1,0 +1,2496 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+
+<html lang="en">
+<head>
+    <title>Publications / Annual Report</title>
+    <!--
+    <PageMap>
+    <DataObject type="document">
+    <Attribute name="siteid">1</Attribute>
+    </DataObject>
+    </PageMap>
+    -->
+
+
+    
+    <!-- Begin swuc.GlobalJS -->
+<script type="text/javascript">
+ staticURL = "http://www.apsva.us/Static/V2_10_01/";
+ SessionTimeout = "0";
+</script>
+<!-- End swuc.GlobalJS -->
+    
+    
+    <!-- Stylesheets -->
+
+    <link rel="Stylesheet" type="text/css" href="http://www.apsva.us/Static/V2_10_01/App_Themes/SW/jquery.jgrowl.css" />
+    <link rel="Stylesheet" type="text/css" href="http://www.apsva.us/Static/V2_10_01//site/assets/styles/system.css" />
+    <link rel="Stylesheet" type="text/css" href="http://www.apsva.us/Static/V2_10_01//site/assets/styles/apps.css" />
+    <link rel="Stylesheet" type="text/css" href="http://www.apsva.us/Static/V2_10_01/App_Themes/SW/jQueryUI.css" />
+    
+    
+    <!-- Scripts -->
+    
+
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' type='text/javascript'></script>
+    <script src='http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/min/jquery-migrate-1.2.1.js' type='text/javascript'></script>
+
+    <script src='http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js' type='text/javascript'></script>
+
+    
+
+   <!--  -->
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        SetCookie('SWScreenWidth', screen.width);
+        SetCookie('SWClientWidth', document.body.clientWidth);
+
+        //If small browser window and responsive template and first load, reload to get the off-canvas menu
+        var isResponsiveTemplatePreInit = 'False';
+        var isResponsive = 'False';
+
+        if (isResponsiveTemplatePreInit == 'False' && isResponsive == 'True' && document.body.clientWidth < 1024) {
+            window.location.reload(true);
+        } 
+
+        $("div.ui-article:last").addClass("last-article");
+        $("div.region .app:last").addClass("last-app");
+    });
+
+    // ADA SKIP NAV
+    $(document).ready(function() {
+        $(document).on('focus', '#skipLink', function() {
+            $("div.sw-skipnav-outerbar").animate({
+                marginTop: "0px"
+            }, 500);
+        });
+
+        $(document).on('blur', '#skipLink', function() {
+            $("div.sw-skipnav-outerbar").animate({
+                marginTop: "-30px"
+            }, 500);
+        });
+    });
+
+    // ADA MYSTART
+    $(document).ready(function () {
+        var top_level_nav = $('.sw-mystart-nav');
+ 
+        // Set tabIndex to -1 so that top_level_links can't receive focus until menu is open
+        // school dropdown
+        $(top_level_nav).find('ul').find('a').attr('tabIndex', -1);
+
+        // my account dropdown
+        $(top_level_nav).next('ul').find('a').attr('tabIndex', -1);
+ 
+        $(top_level_nav).focus(function() {
+            // hide open menus
+            hideMyStartBarMenu();
+ 
+            // show school dropdown
+            if ($(this).find('ul').length > 0) {
+                $(this).find('.sw-dropdown').css('display', 'block').attr('aria-hidden', 'false');
+            }
+
+            // show my account dropdown
+            if ($(this).next('ul').length > 0) {
+                $(this).next('.sw-dropdown').css('display', 'block').attr('aria-hidden', 'false');
+                $('#sw-mystart-account').addClass("clicked-state");
+            }
+        });
+ 
+        // Bind arrow keys for navigation
+        $(top_level_nav).keydown(function(e) {
+            if (e.keyCode == 37) { //key left
+                e.preventDefault();
+
+                // This is the first item
+                if ($(this).prev('.sw-mystart-nav').length == 0) {
+                    $(this).parents('div').find('.sw-mystart-nav').last().focus();
+                } else {
+                    $(this).prev('.sw-mystart-nav').focus();
+                }
+            } else if(e.keyCode == 38) { //key up
+                e.preventDefault();
+
+                // show school dropdown
+                if ($(this).find('ul').length > 0) {
+                    $(this).find('div.sw-dropdown').css('display', 'block').find('ul').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).last().focus();
+                }
+
+                // show my account dropdown
+                if ($(this).find('ul').length > 0) {
+                    $(this).find('ul.sw-dropdown').css('display', 'block').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).last().focus();
+                }
+            } else if(e.keyCode == 39) { //key right
+                e.preventDefault();
+
+                // This is the last item
+                if ($(this).next('.sw-mystart-nav').length == 0) {
+                    $(this).parents('div').find('.sw-mystart-nav').first().focus();
+                } else {
+                    $(this).next('.sw-mystart-nav').focus();
+                }
+            } else if(e.keyCode == 40) { //key down
+                e.preventDefault();
+
+                // show school dropdown
+                if ($(this).find('ul').length > 0) {
+                    $(this).find('div.sw-dropdown').css('display', 'block').find('ul').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).first().focus();
+                }
+
+                // show my account dropdown
+                if ($(this).next('ul').length > 0) {
+                    $(this).next('ul.sw-dropdown').css('display', 'block').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).first().focus();
+                }
+            } else if(e.keyCode == 13 || e.keyCode == 32) { //enter key
+                // If submenu is hidden, open it
+                e.preventDefault();
+
+                $(this).parent('li').find('ul[aria-hidden=true]').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).first().focus();
+            } else if (e.keyCode == 27) { //escape key
+                e.preventDefault();
+                hideMyStartBarMenu();
+            } else {
+                $(this).parent('.sw-mystart-nav').find('ul[aria-hidden=false] a').each(function() {
+                    if ($(this).text().substring(0,1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                        $(this).focus();
+                        return false;
+                    }
+                });
+            }
+        });
+       
+        // school dropdown
+        var startbarlinks = $(top_level_nav).find('ul').find('a');
+        bindMyStartBarLinks(startbarlinks);
+
+        // my account dropdown
+        var myaccountlinks = $(top_level_nav).next('ul').find('a');
+        bindMyStartBarLinks(myaccountlinks);
+ 
+        function bindMyStartBarLinks(links) {
+            $(links).keydown(function(e) {
+                e.stopPropagation();
+
+                if (e.keyCode == 38) { //key up
+                    e.preventDefault();
+
+                    // This is the first item
+                    if ($(this).parent('li').prev('li').length == 0) {
+                        if ($(this).parents('ul').parents('.sw-mystart-nav').length > 0) {
+                            $(this).parents('ul').parents('.sw-mystart-nav').focus();
+                        } else {
+                            $(this).parents('ul').prev('.sw-mystart-nav').focus();
+                        }
+                    } else {
+                        $(this).parent('li').prev('li').find('a').first().focus();
+                    }
+                } else if (e.keyCode == 40) { //key down
+                    e.preventDefault();
+                    
+                    if ($(this).parent('li').next('li').length == 0) {
+                        if ($(this).parents('ul').parents('.sw-mystart-nav').length > 0) {
+                            $(this).parents('ul').parents('.sw-mystart-nav').focus();
+                        } else {
+                            $(this).parents('ul').prev('.sw-mystart-nav').focus();
+                        }
+                    } else {
+                        $(this).parent('li').next('li').find('a').first().attr('tabIndex', 0);
+                        $(this).parent('li').next('li').find('a').first().focus();
+                    }
+                } else if (e.keyCode == 27 || e.keyCode == 37) { // escape key or key left
+                    e.preventDefault();
+                    hideMyStartBarMenu();
+                } else if (e.keyCode == 32) { //enter key
+                    e.preventDefault();
+                    window.location = $(this).attr('href');
+                } else {
+                    var found = false;
+
+                    $(this).parent('div').nextAll('li').find('a').each(function() {
+                        if ($(this).text().substring(0, 1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                            $(this).focus();
+                            found = true;
+                            return false;
+                        }
+                    });
+                   
+                    if (!found) {
+                        $(this).parent('div').prevAll('li').find('a').each(function() {
+                            if ($(this).text().substring(0, 1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                                $(this).focus();
+                                return false;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+ 
+        // Hide menu if click or focus occurs outside of navigation
+        $('#sw-mystart-inner').find('.sw-mystart-nav').last().keydown(function(e) { 
+            if (e.keyCode == 9) {
+                // If the user tabs out of the navigation hide all menus
+                hideMyStartBarMenu();
+            }
+        });
+
+        /*$(document).click(function() { 
+            hideMyStartBarMenu();
+        });*/
+
+        // try to capture as many custom MyStart bars as possible
+        $('.sw-mystart-button').find('a').focus(function() {
+            hideMyStartBarMenu();
+        });
+       
+        $('#sw-mystart-inner').click(function(e) {
+            e.stopPropagation();
+        });
+
+        $('ul.sw-dropdown-list').blur(function() {
+            hideMyStartBarMenu();
+        });
+
+        $('#ui-btn-mypasskey').focus(function() {
+            hideMyStartBarMenu();
+        });
+
+        $('#ui-btn-sitemanager').focus(function() {
+            hideMyStartBarMenu();
+        });
+
+        $('#ui-btn-myview').focus(function() {
+            hideMyStartBarMenu();
+        });
+
+        $('#ui-btn-signin').focus(function() {
+            hideMyStartBarMenu();
+        });
+
+        $('#ui-btn-register').focus(function() {
+            hideMyStartBarMenu();
+        });
+
+        // button click events
+        $('div.sw-mystart-button.home a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+
+        $('div.sw-mystart-button.pw a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+
+        $('div.sw-mystart-button.manage a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+
+        $('#sw-mystart-account').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).addClass('clicked-state');
+                $('#sw-myaccount-list').show();
+            }
+        });
+
+        $('#sw-mystart-mypasskey a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+
+        $('div.sw-mystart-button.signin a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+
+        $('div.sw-mystart-button.register a').keydown(function(e) {
+            e.stopImmediatePropagation();
+
+            if (e.keyCode == 13) {
+                $(this).click();
+            }
+        });
+    });
+
+    function hideMyStartBarMenu() {
+        $('.sw-dropdown').attr('aria-hidden', 'true').css('display', 'none').find('a').attr('tabIndex', -1);
+        $('#sw-mystart-account').removeClass("clicked-state");
+    }
+
+    // ADA CHANNEL NAV
+    $(document).ready(function() {
+        var settings = {
+            menuHoverClass: 'hover'
+        };
+
+        // Add ARIA role to menubar and menu items
+        $('#channel-navigation').attr('role', 'menubar').find('li').attr('role', 'menuitem');
+
+        var top_level_links = $('#channel-navigation').find('> li > a');
+
+        // Set tabIndex to -1 so that top_level_links can't receive focus until menu is open
+        $(top_level_links).next('ul').attr({ 'aria-hidden': 'true', 'role': 'menu' }).find('a').attr('tabIndex', -1);
+
+        // Adding aria-haspopup for appropriate items
+        $(top_level_links).each(function() {
+            if ($(this).next('ul').length > 0)
+                $(this).parent('li').attr('aria-haspopup', 'true');
+        });
+
+        $(top_level_links).focus(function() {
+            //hide open menus
+            hideChannelMenu();
+
+            if ($(this).parent('li').find('ul').length > 0) {
+                $(this).parent('li').addClass(settings.menuHoverClass).find('ul').css('display', 'block');
+            }
+        });
+
+        // Bind arrow keys for navigation
+        $(top_level_links).keydown(function(e) {
+            if (e.keyCode == 37) { //key left
+                e.preventDefault();
+
+                // This is the first item
+                if ($(this).parent('li').prev('li').length == 0) {
+                    $(this).parents('ul').find('> li').last().find('a').first().focus();
+                } else {
+                    $(this).parent('li').prev('li').find('a').first().focus();
+                }
+            } else if (e.keyCode == 38) { //key up
+                e.preventDefault();
+
+                if ($(this).parent('li').find('ul').length > 0) {
+                    $(this).parent('li').addClass(settings.menuHoverClass).find('ul').css('display', 'block').attr('aria-hidden', 'false').find('a').attr('tabIndex', 0).last().focus();
+                }
+            } else if (e.keyCode == 39) { //key right
+                e.preventDefault();
+
+                // This is the last item
+                if ($(this).parent('li').next('li').length == 0) {
+                    $(this).parents('ul').find('> li').first().find('a').first().focus();
+                } else {
+                    $(this).parent('li').next('li').find('a').first().focus();
+                }
+            } else if (e.keyCode == 40) { //key down
+                e.preventDefault();
+
+                if ($(this).parent('li').find('ul').length > 0) {
+                    $(this).parent('li')
+                         .addClass(settings.menuHoverClass)
+                         .find('ul').css('display', 'block')
+                         .attr('aria-hidden', 'false')
+                         .find('a').attr('tabIndex', 0)
+                         .first().focus();
+                }
+            } else if (e.keyCode == 13 || e.keyCode == 32) { //enter key
+                // If submenu is hidden, open it
+                e.preventDefault();
+
+                $(this).parent('li').find('ul[aria-hidden=true]').attr('aria-hidden', 'false').addClass(settings.menuHoverClass).find('a').attr('tabIndex', 0).first().focus();
+            } else if (e.keyCode == 27) { //escape key
+                e.preventDefault();
+                hideChannelMenu();
+            } else {
+                $(this).parent('li').find('ul[aria-hidden=false] a').each(function() {
+                    if ($(this).text().substring(0, 1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                        $(this).focus();
+                        return false;
+                    }
+                });
+            }
+        });
+
+        var links = $(top_level_links).parent('li').find('ul').find('a');
+
+        $(links).keydown(function(e) {
+            if (e.keyCode == 38) {
+                e.preventDefault();
+
+                // This is the first item
+                if ($(this).parent('li').prev('li').length == 0) {
+                    $(this).parents('ul').parents('li').find('a').first().focus();
+                } else {
+                    $(this).parent('li').prev('li').find('a').first().focus();
+                }
+            } else if (e.keyCode == 40) {
+                e.preventDefault();
+
+                if ($(this).parent('li').next('li').length == 0) {
+                    $(this).parents('ul').parents('li').find('a').first().focus();
+                } else {
+                    $(this).parent('li').next('li').find('a').first().focus();
+                }
+            } else if (e.keyCode == 27 || e.keyCode == 37) {
+                e.preventDefault();
+
+                $(this).parents('ul').first().prev('a').focus().parents('ul').first().find('.' + settings.menuHoverClass).attr('aria-hidden', 'true').removeClass(settings.menuHoverClass).find('a').attr('tabIndex', -1);
+            } else if (e.keyCode == 32) {
+                e.preventDefault();
+                window.location = $(this).attr('href');
+            } else {
+                var found = false;
+
+                $(this).parent('li').nextAll('li').find('a').each(function() {
+                    if ($(this).text().substring(0, 1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                        $(this).focus();
+                        found = true;
+                        return false;
+                    }
+                });
+
+                if (!found) {
+                    $(this).parent('li').prevAll('li').find('a').each(function() {
+                        if ($(this).text().substring(0, 1).toLowerCase() == keyCodeMap[e.keyCode]) {
+                            $(this).focus();
+                            return false;
+                        }
+                    });
+                }
+            }
+        });
+
+        function hideChannelMenu() {
+            $('li.sw-channel-item.' + settings.menuHoverClass).attr('aria-hidden', 'true').removeClass(settings.menuHoverClass).find('ul').css('display', 'none').find('a').attr('tabIndex', -1);
+        }
+
+        // Hide menu if click or focus occurs outside of navigation
+        $('#channel-navigation').find('a').last().keydown(function(e) {
+            if (e.keyCode == 9) {
+                // If the user tabs out of the navigation hide all menus
+                hideChannelMenu();
+            }
+        });
+
+        $('#channel-navigation').find('a').first().keydown(function(e) {
+            if (e.keyCode == 9) {
+                // hide open MyStart Bar menus
+                hideMyStartBarMenu();
+            }
+        });
+
+        /*$(document).click(function() {
+            hideChannelMenu();
+        });*/
+
+        $('#channel-navigation').click(function(e) {
+            e.stopPropagation();
+        });
+    });
+    </script>
+    
+    <!-- Page -->
+    
+    <style type="text/css">/* MedaiBegin Standard */                    /* MyStart Change */
+.sw-mystart-dropdown .sw-dropdown-arrow {
+	background: url("/cms/lib2/VA01000586/Centricity/Template/2/sw-mystart-arrow.png") no-repeat scroll 6px 7px transparent
+}
+.sw-mystart-dropdown .sw-dropdown-list li a, .sw-mystart-dropdown .selector, .sw-dropdown .sw-dropdown-selected  {
+	color: #454545;
+}
+.sw-mystart-dropdown, #sw-mystart-search, .sw-mystart-dropdown .sw-dropdown {
+	background-color: #E7EFFC;
+	color: #454545;
+}
+#gb-search #search-input {
+	color: #454545;
+}
+div.sw-dropdown, .sw-channel-dropdown {
+	-moz-box-shadow: 3px 3px 3px #454545;
+	-webkit-box-shadow: 3px 3px 3px #454545;
+	box-shadow: 3px 3px 3px #454545;
+}
+/* End MyStart Change */
+/* GroupBegin Global */ 
+.hidden {
+	display: none;
+}
+div#gb-page {
+	width: 1000px;
+	height: auto;
+	margin: 0 auto 0 auto;
+	position: relative;
+	
+}
+div.ui-widget.app.navigation a span {
+	display: table;
+}
+div#gb-logo {
+	padding: 36px 12px 0 26px;
+	float: left;
+	
+}
+
+div#gb-school{
+	float: left;
+	color: #fff;
+	height: 125px;
+	margin: 15px 0px 0px 0px;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-school.png) no-repeat bottom right;
+	padding: 0 15px 0px 0px;
+	
+}
+div#gb-school .line-one {
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 40px;
+	margin: 0px;
+	padding : 0px;
+	font-weight: normal;
+	padding: 10px 0 6px 0;
+	line-height: 40px;
+	
+}
+div#gb-school .line-two {
+	font-size: 18px;
+	font-weight: normal;
+	text-transform: uppercase;
+	margin: 0px;
+	padding: 0;
+	line-height: 17px;
+	letter-spacing: 3px;
+	
+	
+}
+
+div#gb-school .tagline {
+	font-family: 'Vollkorn',arial,serif;
+        font-size: 17px;
+        font-style: italic;
+        font-weight: normal;
+        line-height: 17px;
+        margin: 0;
+        padding: 10px 0 0;
+}
+div#gb-school-info{
+	float: left;
+	float: left;
+	color: #fff;
+	height: 92px;
+	margin: 15px 0px 0px 0px;
+	padding:15px 17px;
+	font-size: 13px;
+	line-height: 140%; 
+	overflow: hidden;
+}
+div#gb-page-header{
+	width: 1000px;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-page-header.png);
+	height: 191px;
+	
+}
+div#gb-content-outer {
+	clear: both;
+}
+div#gb-content-outer:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+div#gb-content-left {
+	width: 15px;
+	float: left;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-page-left.png) no-repeat;
+	
+}
+div#gb-content-right {
+	width: 15px;
+	float: left;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-page-right.png) no-repeat;
+}
+div#gb-header-color {
+	width: 962px;
+	height: 125px;
+	position: absolute;
+	margin-left: -481px;
+	left: 50%;
+	top: 15px;
+	
+}
+div#gb-header {
+	width: 100%;
+        height: 382px;
+        position: absolute;
+        top: 30px;
+        left: 0px;
+        background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-header-background.png) repeat-x; 
+}
+div#gb-header-inner {
+	width: 100%;
+        height: 382px;
+        background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-block-pattern.png) no-repeat center center;
+        position: relative;
+}
+
+div#gb-channel-list-outer {
+	width: 960px;
+	height: 44px;
+	z-index: 8000;
+	clear: both;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/nav-background.png);
+	margin:0 auto;
+}
+div#gb-footer-outside {
+	width: 100%;
+	height: 149px;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/gb-footer-outside.png) repeat-x ;
+}
+div#gb-footer {
+	width: 960px;
+	height: auto;
+	margin: 0 auto 0 auto;
+	padding: 20px 0px 9px 0px;
+}
+div#gb-footer:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+div.gb.footer {
+	padding: 0px 20px;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/footer-border.png) repeat-y right top;
+	color: #fff;
+	font-size: 13px;
+	float: left;
+	margin-bottom: 10px;
+	height: 48px;
+
+}
+div.gb.footer a {
+	color: #fff;
+	font-size: 13px;
+}
+
+div.gb.footer.four {
+	background: transparent;	
+}
+div.footer-equal-access {
+	color: #fff;
+	clear: both;
+	padding: 10px;
+	font-size: 11px;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/footer-border-top.png) repeat-x;
+	
+}
+div#custom-schoolwires-footer{
+	padding:15px;
+	width: 940px;
+	margin: 0px auto;
+	color: #534E48;
+	font-size: 13px;
+	font-weight: bold;
+}
+div#custom-schoolwires-footer a {
+	color: #534E48;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0px 10px;
+	
+}
+div#sw-footer-outer  {
+	display: none;
+}
+div#gb-global {
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/global-background.png) no-repeat top right;
+	height: 92px;	
+	display: inline-block;
+	color: #fff;
+	padding: 15px;
+	font-size: 15px;
+}
+div#gb-global span {
+	padding: 4px 0px 0px 10px;
+}
+div#district-globals {
+	display: none;
+}
+div#school-globals div {
+	float: left;
+	
+}
+div#district-globals div {
+	float: left;
+	
+}
+div#gb-global-outer {
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/global-border.png) no-repeat top left;
+	padding-left: 3px;
+	display: inline-block;
+	float: right;
+	margin: 15px 18px 3px 0px;
+}
+div#gb-global div {
+	float: left;
+}
+/* GroupEnd */
+/* GroupBegin Homepage */
+div.hp.column.two div.ui-widget .ui-widget-detail .ui-widget-detail {
+	border-left: 0px solid transparent;
+        border-right: 0px solid transparent;
+}
+.ui-hp div.ui-widget .ui-widget-detail .ui-widget-detail, .sp.one div.ui-widget .ui-widget-detail .ui-widget-detail {
+	      background-image:  none;
+              overflow: hidden;
+   
+}
+div#hp-slideshow-outer {
+	width: 528px;
+	overflow: hidden;
+	padding: 0px 1px;
+}
+div#hp-slideshow {
+	width: 528px;	
+}
+div#hp-slideshow ul.pictures {
+	width: 528px;
+	height: 248px;
+	overflow: hidden;
+	
+}
+.imgHolder {
+	width; 528px;
+	height: 248px;
+	overflow: hidden;
+}
+div#sw-content-container10.region.ui-hp div.ui-widget.app.file-library {
+	display: none;
+}
+div#hp-content {
+	width: 970px;
+	height: auto;
+	background: #fff;
+	float: left;
+}
+div#hp-content:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+div.column {
+	float: left;
+}
+div.hp.column.one {
+	width: 209px;
+	height: auto;
+	padding: 5px;
+	overflow: hidden;
+}
+div.hp.column.two {
+	width: 529px;
+	height: auto;
+	padding: 5px 1px;
+	overflow: hidden;
+	 
+}
+div.hp.column.one div.ui-widget.app .ui-widget-header, div.hp.column.three div.ui-widget.app .ui-widget-header, div.sp.column.one div.ui-widget.app .ui-widget-header {
+	height: 32px;
+	width: 209px;
+	background-image: url(/cms/lib2/VA01000586/Centricity/Template/2/hp-one-header.png);
+	overflow: hidden;
+	
+	
+	
+}  
+div.hp.column.two div.ui-widget.app .ui-widget-header h1, div#section-header h1, div.hp.column.one div.ui-widget.app .ui-widget-header h1, div.hp.column.three div.ui-widget.app .ui-widget-header h1, div.sp.column.one div.ui-widget.app .ui-widget-header h1{
+	font-weight: normal;
+	color: #fff;
+	padding: 5px 18px;
+	line-height: 26px;
+	margin: 0px;
+	font-size: 20px;
+	
+} 
+div.hp.column.two  div.ui-widget.app .ui-widget-header{
+	background-image: URL(/cms/lib2/VA01000586/Centricity/Template/2/hp-two-header.png);
+	width: 529px;
+	height: 32px;
+}  
+div.hp.column.two div.ui-widget .ui-widget-detail {
+	border-left: 1px solid #DFD8CF;
+	border-right: 1px solid #DFD8CF; 
+}
+div.hp.column.three {
+	width: 209px;
+	height: auto;
+	padding: 5px;
+	overflow: hidden;
+}
+.ui-hp div.ui-widget .ui-widget-detail, .sp.one div.ui-widget .ui-widget-detail {
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/hp-detail.png) repeat-x 2px 0px;
+	overflow: hidden;
+}
+/* GroupEnd */
+
+/* GroupBegin Subpage */
+div.sp.column.one {
+	width: 209px;
+	height: auto;
+	padding: 5px;
+        height: auto!important;
+	min-height: 200px;
+	height: 200px;
+}
+div.sp.column.two {
+    background: url("/cms/lib2/VA01000586/Centricity/Template/2/hp-detail.png") repeat-x scroll 0 38px transparent;
+    height: auto;
+    padding: 5px 1px;
+    width: 743px;
+    border-left: 1px solid #DFD8CF;
+    
+    
+}
+
+
+div#section-header {
+	height: 32px;
+	width: 745px;
+	background-image: url(/cms/lib2/VA01000586/Centricity/Template/2/sp-column-two-header.png);
+	overflow: hidden;
+} 
+div.sp.column.two div.ui-widget.app {
+	padding: 0px 5px;
+}
+div.sp.column.two .ui-widget-header {
+	padding: 0px 15px;	
+}
+ul.ui-breadcrumbs {
+	border-bottom: 1px solid #DFD8CF;
+	margin: 0 20px;
+	padding: 20px 0 5px 0;	
+}
+ul.ui-breadcrumbs a, ul.ui-breadcrumbs a:hover, ul.ui-breadcrumbs a:visited, ul.ui-breadcrumbs a:active {
+	text-decoration: none;
+	color: #524C46
+}
+div#sp-content {
+	width: 970px;
+	height: auto;
+	background: #fff;
+	float: left;
+
+}
+div#sp-content:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+div#spn-content {
+	width: 940px;
+	height: auto;
+	background: #fff;
+	float: left;
+	
+	padding: 15px;
+	
+}
+div#spn-content:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+/* GroupEnd */ 
+     /* GroupBegin App Styles */ 
+.ui-widget.app.announcements ul li {
+    margin: 6px 0px;
+}
+.ui-widget.app.announcements .ui-article-description {
+    border-bottom: 1px solid #CEB89A;
+    padding-bottom: 2px;
+}     
+div.ui-widget.app.announcements .ui-widget-detail {
+	padding-bottom: 0px;
+}
+.swlastmodifeddate {
+	text-align: right;
+
+}
+.view-calendar-link {
+	color: #534E48;
+	text-decoration: underline;
+
+}
+.announcements .ui-widget-footer {
+    border-top: 0px solid transparent;
+    height: 28px;
+    padding-left: 15px;
+}
+div.ui-widget .ui-widget-detail {
+	padding: 5px 15px;
+}
+.ui-article-title, .ui-article-title a, .blog .ui-widget-detail h1, .ui-flex-group-heading h1, .blog .ui-widget-sidebar h1  {
+	color: #003399;
+	font-size: 15px;
+	line-height: 16px;
+	padding: 0px 0px 3px 0px;
+}
+.blog {
+	font-size: 14px;
+}
+.minibase .sw-flex-item-list {
+	float: none;
+}
+ /* GroupEnd */
+/* GroupBegin Channel Bar Styles */
+#sw-channel-list-container {
+	display: block;
+	width: 960px;
+	height: 44px;
+}
+ul.sw-channel-list {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+ul.sw-channel-list li.sw-channel-item {
+	float: left;
+	height: 44px;
+	list-style: none outside none;
+	margin: 0;
+	position: relative;
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/channel-li.png) no-repeat top right;
+}
+ul.sw-channel-list li.sw-channel-item.hover, ul.sw-channel-list li.sw-channel-item.active {
+	background: url(/cms/lib2/VA01000586/Centricity/Template/2/active.png);
+}  
+li.sw-channel-item > a {
+	color: #ffffff;
+	display: block;
+	height: 100%;
+	padding: 0 6px 0 0;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	height: 44px;
+}
+li.sw-channel-item > a span {
+    display: block;
+    height: 24px;
+    padding: 20px 0 0 13px;
+}
+li.sw-channel-item.hover > a {
+	color: #ffffff;
+}
+li.sw-channel-item.hover > a span {
+}
+li.sw-channel-item.active > a {
+	color: #ffffff;
+}
+li.sw-channel-item.active > a span {
+}
+ul.sw-channel-dropdown {
+	background: url("/cms/lib2/VA01000586/Centricity/Template/2/hp-detail.png") repeat-x scroll 2px 0 #ffffff;
+	border: 1px solid #ffffff;
+	display: none;
+	font-size: 12px;
+	font-weight: normal;
+	left: 0;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 43px;
+	width: 180px;
+	z-index: 7001;
+}
+ul.sw-channel-dropdown li {
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+	display: block;
+	height: auto;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0;
+	white-space: pre-wrap;
+	width: 180px;
+}
+ul.sw-channel-dropdown li a {
+	background: none repeat scroll 0 0 transparent;
+	color: #666666;
+	display: block;
+	padding: 7px 10px;
+	text-decoration: none;
+	width: 160px;
+}
+ul.sw-channel-dropdown li a:hover {
+	background: none repeat scroll 0 0 #2B2B2B;
+	color: #ffffff;
+}
+.sw-channel-more-li {
+	background-color: #333333;
+	background-image: url("http://c2.creative.schoolwires.net//GlobalAssets/Images/Backgrounds/sw-channel-more-chevron.png");
+	background-position: right top;
+	background-repeat: no-repeat;
+	color: #FFFFFF;
+}
+ul.sw-channel-dropdown li.sw-channel-more-li a:hover {
+	background-color: #2B2B2B;
+	background-image: url("http://c2.creative.schoolwires.net//GlobalAssets/Images/Backgrounds/sw-channel-more-chevron.png");
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+.sw-channel-more-span {
+	color: #FFFFFF;
+}
+/* GroupEnd */  
+       
+/* GroupBegin EditorStyles */
+body {
+	font-family: "Trebuchet MS", Arial, Tahoma, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #333333;
+	background:transparent;
+}
+h1 {
+	font-size: 30px;
+	line-height: 30px;
+	padding:7px 0px 7px 0px;
+}
+h2 {
+	font-size: 26px;
+	line-height: 22px;
+	padding:6px 0px 6px 0px;
+}
+h3 {
+	font-size: 22px;
+	padding:5px 0px 5px 0px;
+}
+h4 {
+	font-size: 18px;
+	padding:10px 0px 0px 0px;
+}
+h5 {
+	font-size: 16px;
+	padding:0px 0px 0px 0px;
+}
+h6 {
+	font-size: 14px;
+	padding:0px 0px 0px 0px;
+}
+.title {
+	font-weight:bold;
+}
+.subtitle {
+	font-style:italic;
+}
+
+h1,h2,h3,h4,h5,h6 {
+margin-bottom: 0px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+margin-top: 0px;
+
+
+}
+
+/* GroupEnd */
+
+        
+
+        
+ /* GroupBegin Additional body Styles */ 
+ body {
+ 	background: url(/cms/lib2/VA01000586/Centricity/Template/2/body.jpg) no-repeat 50% 412px ;
+
+}
+ /* GroupEnd */
+        
+        
+        
+        
+        
+        
+        
+ /* GroupBegin Sub Navigation  */ 
+
+div.ui-widget.app.navigation li div.bullet {
+	background: url("/cms/lib2/VA01000586/Centricity/Template/2/bullet.png") no-repeat scroll 0px 0px transparent;
+}
+div.ui-widget.app.navigation li div.bullet.expandable {
+	background: url("/cms/lib2/VA01000586/Centricity/Template/2/expandible.png") no-repeat scroll 0px 0px transparent;
+}
+div.ui-widget.app.navigation li div.bullet.collapsible {
+	background: url("/cms/lib2/VA01000586/Centricity/Template/2/collapsible.png") no-repeat scroll 0px 0px transparent;
+}
+div.navigation a, div.navigation a:hover, div.navigation a:visited, div.navigation a:active {
+	color: #333333;
+	
+
+	
+}
+div.ui-widget.app.navigation a span:hover {
+	text-decoration: underline;
+}
+div.navigation a:hover, div.navigation li.active a {
+	font-weight: bold;
+}
+div.ui-widget.app.navigation li {
+	padding: 7px;
+}
+ /* GroupEnd */        
+        
+          
+           
+ /* GroupBegin Search */ 
+#search-input {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #CCCCCC;
+    float: left;
+    height: 18px;
+    margin: 0;
+    padding: 2px 2px 0 5px;
+    width: 138px;
+}
+#search-button {
+    border-left: 1px solid #333333;
+    float: left;
+    height: 18px;
+    margin: 1px 0 0;
+    width: 24px;
+}
+ /* GroupEnd */
+        
+  .ui-widget.app.flexpage ul{
+	list-style-type:disc;
+	margin-left:15px;
+}         
+.ui-widget.app.flexpage ul.ui-pagination-list {
+	list-style-type: none;
+	margin:0px 0px 0px 10px;
+}  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                /* MediaEnd *//* MediaBegin 768+ */ @media (max-width: 1023px) {                    
+                } /* MediaEnd *//* MediaBegin 640+ */ @media (max-width: 767px) {                    
+                } /* MediaEnd *//* MediaBegin 480+ */ @media (max-width: 639px) {                     
+                } /* MediaEnd *//* MediaBegin 320+ */ @media (max-width: 479px) {                    
+                } /* MediaEnd */</style>
+    <link rel="shortcut icon" type="image/x-icon" href="/cms/lib2/VA01000586/Centricity/Template/2/favicon.ico">
+<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
+<LINK href="/cms/lib2/VA01000586/Centricity/Template/2/jg-pop/jg-pop.css" type="text/css" rel="stylesheet">
+<SCRIPT src="/cms/lib2/VA01000586/Centricity/Template/2/jg-pop/jquery.cookie.js" type="text/javascript"></SCRIPT>
+<SCRIPT src="/cms/lib2/VA01000586/Centricity/Template/2/jg-pop/c2-jg-pop.js" type="text/javascript"></SCRIPT>
+<script type="text/javascript" src="/cms/lib2/VA01000586/Centricity/Template/2/scripts/jquery.ba-resize.min.js"></script>
+<script src="//extend.schoolwires.com/creative/scripts/joel/rotate.gallery/joel.photoGallery.rotate.v1.0.min.js"></script>
+<script type="text/javascript" src="/cms/lib2/VA01000586/Centricity/Template/2/setup/aps.txt"></script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	  	changeColors();
+	        modMyStartDropdown();
+		outerHeight();
+		highLightChannels();
+		addSchoolInfo();
+		addContents();
+		addTranslate();
+		hideShowHeaderItems();
+		hideDistrictCalendar();
+		changeDistrictText();
+		replaceSearch();
+		$("#search-input").click(function(){
+			$(this).attr("value", "");
+		});
+		$("#search-button").attr("src" , "/cms/lib2/VA01000586/Centricity/Template/2/sw-mystart-search.png");
+		//Photo Gallery Configuration
+		$("#sw-content-container10.region.ui-hp div.ui-widget.app.gallery").galleryRotate({
+			"height" 		: 255,
+			"width"			: 528
+		});
+	});
+	function modMyStartDropdown() {
+		
+		$("div.sw-mystart-dropdown.schoollist div.sw-dropdown ul.sw-dropdown-list li").eq(16).after("<li><a href='/henry'>Henry Elementary School</a></li>");	
+		$("div.sw-mystart-dropdown.schoollist div.sw-dropdown ul.sw-dropdown-list li").eq(18).after("<li><a href='/domain/2860'>Integration Station</li>");
+		$("div.sw-mystart-dropdown.schoollist div.sw-dropdown ul.sw-dropdown-list li").eq(26).after("<li><a href='/montessori/'>Montessori</a></li>");
+		$("div.sw-mystart-dropdown.schoollist div.sw-dropdown ul.sw-dropdown-list li").eq(28).after("<li><a href='/discovery'>New Elementary School</a></li>");	
+	}
+	function replaceSearch(){
+		var searchCode = "<div id='gb-search'><form id='search-form' action='http://www.google.com/cse'><input id='valueHolder' value='016716305685879042625:jytgyv8q1ho'; type='hidden' name='cx' /><input value='UTF-8' type='hidden' name='ie' /> <input id='search-input' value='Search...' size='24' name='q' /> <input id='search-button' value='submit'  type='image' name='sa' /> </form></div>";
+		$("#sw-mystart-search").html(searchCode);
+	}
+	function changeDistrictText(){
+		$(".sw-mystart-button.home span").html("APS Home<div id='sw-home-icon'></div>");
+	}
+	function hideDistrictCalendar(){
+		if ("aps" == "aps" || "aps" == "wakefield" || "aps" == "drew" || "aps" == "yhs" || "aps" == "gunston" || "aps" == "reed" || "aps" == "careercenter" || "aps" == "discovery" || "aps" == "swanson" || "aps" == "campbell") {
+			$("li.sw-channel-item > a span:contains('Calendar')").parent().parent().hide();
+		}
+		$(".sw-mystart-dropdown .sw-dropdown-list li:contains('Intranet')").hide();
+	
+	}
+	function hideShowHeaderItems(){
+		if ("aps" == "aps"){
+			$("#gb-school").hide();
+			$("#gb-school-info").hide();
+			$("#school-globals").hide();
+			$("#district-globals").show();
+		}	
+	}
+	function addTranslate()
+	{
+		var pageURL = window.location.href;
+		var translateDropdown = "<div class='sw-mystart-dropdown translate'>" +
+							"<div class='selector'>Translate this page...</div>" +
+							"<div class='sw-dropdown' style='display: none;'>" +
+								"<div class='sw-dropdown-selected'>Translate this page...</div>" +
+								"<ul class='sw-dropdown-list'>" +
+									"<li>" +
+										"<div><a href='/cms/lib2/VA01000586/Centricity/Shared/disclaimer.pdf'>Disclaimer</a></div>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|es&hl=en&anno=0&ie=UTF8'>English to Spanish</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|ar&hl=en&anno=0&ie=UTF8'>English to Arabic</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|zh-CN&hl=en&anno=0&ie=UTF8'>English to Chinese (Simplified)</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|zh-TW&hl=en&anno=0&ie=UTF8'>English to Chinese (Traditional)</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|fr&hl=en&anno=0&ie=UTF8'>English to French</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|de&hl=en&anno=0&ie=UTF8'>English to German</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|it&hl=en&anno=0&ie=UTF8'>English to Italian</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|ja&hl=en&anno=0&ie=UTF8'>English to Japanese</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|ko&hl=en&anno=0&ie=UTF8'>English to Korean</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|pt&hl=en&anno=0&ie=UTF8'>English to Portuguese</a>" +
+									"</li>" +
+									"<li>" +
+										"<a href='http://translate.google.com/translate?u=" + pageURL + "&langpair=en|ru&hl=en&anno=0&ie=UTF8'>English to Russian</a>" +
+									"</li>" +
+								"</ul>" +
+							"</div>" +
+							"<div class='sw-dropdown-arrow'></div>" +
+						"</div>";
+		var pageHost = window.location.host;
+		if(pageHost != "translate.googleusercontent.com")
+		{				
+			$("#sw-mystart-left").append(translateDropdown);
+			$(".sw-mystart-dropdown.translate").click(function()
+			{
+				$(".sw-dropdown",this).show();
+			});
+			$(".sw-mystart-dropdown.translate").hover(function()
+			{
+			},
+			function()
+			{
+				$(".sw-dropdown",this).hide();
+			});
+		}	
+	}
+	function addContents(){
+		$(".sp.column.one .ui-widget-header:first").html("<h1>Contents</h1>");
+	}
+	function addSchoolInfo(){	
+		$("#gb-school .line-one").prepend(schoolNameOne);
+		$("#gb-school .line-two").prepend(schoolNameTwo);
+		$("#gb-school .tagline").prepend(schoolTagline);
+		$(".principal-name").prepend(principalName);
+		$(".footer-school-name").prepend(schoolNameOne + " "  + schoolNameTwo);
+	}
+	function highLightChannels(){
+		if ("aps" == "aps"){
+			$("li.sw-channel-item a span:contains('Home')").parent().parent().addClass("active");
+			var parentBackground = navColor + " url(/cms/lib2/VA01000586/Centricity/Template/2/left-parents.png) no-repeat";
+			var rightBackground = navColor + " url(/cms/lib2/VA01000586/Centricity/Template/2/right-nav.png) no-repeat right top";
+			var leftBackground = navColor + " url(/cms/lib2/VA01000586/Centricity/Template/2/left-nav.png) no-repeat";
+			
+			//Parents
+			$("li.sw-channel-item > a span:contains('Parents')").css("background", parentBackground);
+			$("li.sw-channel-item > a:contains('Parents')").css("background", rightBackground);
+			//Students
+			$("li.sw-channel-item > a span:contains('Students')").css("background", leftBackground);
+			$("li.sw-channel-item > a:contains('Students')").css("background", rightBackground);
+			//Staff
+			$("li.sw-channel-item > a span:contains('Staff')").css("background", leftBackground);
+			$("li.sw-channel-item > a:contains('Staff')").css("background", rightBackground);
+			//Community
+			$("li.sw-channel-item > a span:contains('Community')").css("background", leftBackground);
+			$("li.sw-channel-item > a:contains('Community')").css("background", rightBackground);
+		}
+	}
+	function changeColors(){	
+		$("#gb-header, div#gb-header-color").css("background-color", primaryColor);
+		$("#gb-footer-outside").css("background-color", primaryColor);
+		$("div#gb-channel-list-outer").css("background-color", navColor);
+		$("div.hp.column.one div.ui-widget.app .ui-widget-header, div.hp.column.three div.ui-widget.app .ui-widget-header, div.sp.column.one div.ui-widget.app .ui-widget-header").css("background-color", secondaryColor);
+		$("div.hp.column.two div.ui-widget.app .ui-widget-header, div#section-header").css("background-color", primaryColor);
+	}
+	
+	function outerHeight(){
+		var outerHeight = $("#hp-content, #sp-content, #spn-content").height();
+		$("#gb-content-left, #gb-content-right").height(outerHeight);
+		$(".outer.column").children().resize(function(){
+			$(".outer.column").height("auto");
+			var outerHeight = $("#hp-content, #sp-content, #spn-content").height();
+		        $("#gb-content-left, #gb-content-right").height(outerHeight);		
+		});	
+	}	
+</script>
+<meta name="google-site-verification" content="YuzBvgoGqVvubgqJFlSqXyRz6mLk4_RNcUuqGIzS7E0" />
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8459330-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0034/1720.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+        
+        
+        
+        
+        
+    
+    <!-- App Preview -->
+    
+	
+	
+	<style type="text/css">
+		/* HOMEPAGE EDIT THUMBNAIL STYLES */
+		
+		div.region {
+		    
+		}
+		
+		div.region span.homepage-thumb-region-number {
+		    font: bold 100px verdana;
+		    color: #fff;  
+		}
+		
+		div.homepage-thumb-region {
+		    background: #264867; /*dark blue*/
+		    border: 5px solid #fff;
+		    text-align: center;
+		    padding: 40px 0 40px 0;
+		    display: block;
+		}
+		div.homepage-thumb-region.region-1 {
+		    background: #264867; /*dark blue*/
+		}
+		div.homepage-thumb-region.region-2 {
+		    background: #5C1700; /*dark red*/
+		}
+		div.homepage-thumb-region.region-3 {
+		    background: #335905; /*dark green*/
+		}
+		div.homepage-thumb-region.region-4 {
+		    background: #B45014; /*dark orange*/
+		}
+		div.homepage-thumb-region.region-5 {
+		    background: #51445F; /*dark purple*/
+		}
+		div.homepage-thumb-region.region-6 {
+		    background: #3B70A0; /*lighter blue*/
+		}
+		div.homepage-thumb-region.region-7 {
+		    background: #862200; /*lighter red*/
+		}
+		div.homepage-thumb-region.region-8 {
+		    background: #417206; /*lighter green*/
+		}
+		div.homepage-thumb-region.region-9 {
+		    background: #D36929; /*lighter orange*/
+		}
+		div.homepage-thumb-region.region-10 {
+		    background: #6E5C80; /*lighter purple*/
+		}
+		
+		/* END HOMEPAGE EDIT THUMBNAIL STYLES */
+	</style>
+	
+	<style type="text/css" media="print">
+       .noprint {
+           display: none !important;
+       }
+    </style>
+    
+    
+
+<!-- Begin Schoolwires Traffic Code --> 
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5173826-6']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+
+    // Added Custom Variable to allow us to filter based on hosting type, so we can see stats for each environment. Pulls from web config.
+  _gaq.push(['_setCustomVar',
+    1,                // This custom var is set to slot #1.  Required parameter.
+    'Hosting Type',    // The name of the custom variable.  Required parameter.
+    'SAASP',        // The value of the custom variable.  Required parameter.
+                      //  (possible values might be Free, Bronze, Gold, and Platinum)
+    1                 // Sets the scope to visitor-level.  Optional parameter.
+  ]);
+    _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- End Schoolwires Traffic Code -->  
+ 
+    
+</head>
+<body>
+
+    <!-- ADA Skip Nav -->
+    <div class="sw-skipnav-outerbar">
+        <a href="#sw-maincontent" id="skipLink" class="sw-skipnav">Skip to Main Content</a>
+    </div>
+
+<!-- off-canvas menu enabled-->
+
+
+	
+
+<style type="text/css">
+	/* SPECIAL MODE BAR */
+	div.sw-special-mode-bar {
+		background: #FBC243 url('http://www.apsva.us/Static/V2_10_01//GlobalAssets/Images/special-mode-bar-background.png') no-repeat;
+		height: 30px;
+		text-align: left;
+		font-size: 12px;
+		position: relative;
+		z-index: 10000;
+	}
+	div.sw-special-mode-bar > div {
+		padding: 8px 0 0 55px;
+		font-weight: bold;
+	}
+	div.sw-special-mode-bar > div > a {
+		margin-left: 20px;
+		background: #A0803D;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: #fff;
+		padding: 4px 6px 4px 6px;
+		font-size: 11px;
+	}
+	
+	body.blue div.sw-special-mode-bar, body.green div.sw-special-mode-bar, body.red div.sw-special-mode-bar {
+	    display: none;
+	}
+
+	/* END SPECIAL MODE BAR */
+</style>
+
+<script type="text/javascript">
+	
+	function SWEndPreviewMode() { 
+		var data = "{}";
+		var success = "window.location='';";
+		var failure = "CallControllerFailure(result[0].errormessage);";
+		CallController("http://www.apsva.us/site/SiteController.aspx/EndPreviewMode", data, success, failure);
+	}
+	
+	function SWEndEmulationMode() {
+		SetUnescapedCookie('UserID', GetCookie('SourceEmulationUserID'));
+		DeleteCookie('SourceEmulationUserID');
+		window.location = 'http://www.apsva.us/ums/Users/Users.aspx';
+	}
+
+	function SWEndPreviewConfigMode() {
+	    var data = "{}";
+	    var success = "window.location='';";
+	    var failure = "CallControllerFailure(result[0].errormessage);";
+	    CallController("http://www.apsva.us/site/SiteController.aspx/EndPreviewConfigMode", data, success, failure);
+	}
+</script>
+            
+
+    <!-- BEGIN - MYSTART BAR -->
+<div id='sw-mystart-outer' class='noprint'>
+<div id='sw-mystart-inner'>
+<div id='sw-mystart-left'>
+<div class='sw-mystart-nav sw-mystart-button home'><a tabindex="0" href="http://www.apsva.us/Domain/1" alt="District Home" title="Return to the homepage on the district site."><span>District Home<div id='sw-home-icon'></div>
+</span></a></div>
+<div class='sw-mystart-nav sw-mystart-dropdown schoollist' tabindex='0'>
+<div class='selector'>Select a School...</div>
+<div class='sw-dropdown'>
+<div class='sw-dropdown-selected'>Select a School</div>
+<ul class='sw-dropdown-list'>
+<li><a href="/Domain/185">Abingdon Elementary School</a></li>
+<li><a href="/Domain/1964">Arlington Career Center</a></li>
+<li><a href="/Domain/3711">Arlington Mill High School</a></li>
+<li><a href="/Domain/2871">Arlington Public Schools Intranet</a></li>
+<li><a href="/Domain/263">Arlington Science Focus Elementary School</a></li>
+<li><a href="/Domain/282">Arlington Traditional Elementary School</a></li>
+<li><a href="/Domain/331">Ashlawn Elementary School</a></li>
+<li><a href="/Domain/388">Barcroft Elementary School</a></li>
+<li><a href="/Domain/465">Barrett Elementary School</a></li>
+<li><a href="/Domain/523">Campbell Elementary School</a></li>
+<li><a href="/Domain/582">Carlin Springs Elementary School</a></li>
+<li><a href="/Domain/634">Claremont Elementary School</a></li>
+<li><a href="/Domain/4352">Discovery Elementary School</a></li>
+<li><a href="/Domain/684">Drew Model School</a></li>
+<li><a href="/Domain/734">Glebe Elementary School</a></li>
+<li><a href="/Domain/1440">Gunston Middle School</a></li>
+<li><a href="/Domain/1591">H-B Woodlawn Secondary Program</a></li>
+<li><a href="/Domain/836">Hoffman-Boston Elementary School</a></li>
+<li><a href="/Domain/905">Jamestown Elementary School</a></li>
+<li><a href="/Domain/1676">Jefferson Middle School</a></li>
+<li><a href="/Domain/1742">Kenmore Middle School</a></li>
+<li><a href="/Domain/960">Key Elementary School</a></li>
+<li><a href="/Domain/2744">Langston High School Continuation Program</a></li>
+<li><a href="/Domain/1007">Long Branch Elementary School</a></li>
+<li><a href="/Domain/1044">McKinley Elementary School</a></li>
+<li><a href="/Domain/2767">New Directions</a></li>
+<li><a href="/Domain/1164">Nottingham Elementary School</a></li>
+<li><a href="/Domain/1238">Oakridge Elementary School</a></li>
+<li><a href="/Domain/767">Patrick Henry Elementary School</a></li>
+<li><a href="/Domain/1299">Randolph Elementary School</a></li>
+<li><a href="/Domain/2857">Reed-Westover Building</a></li>
+<li><a href="/Domain/2788">Stratford Program</a></li>
+<li><a href="/Domain/1825">Swanson Middle School</a></li>
+<li><a href="/Domain/1349">Taylor Elementary School</a></li>
+<li><a href="/Domain/2837">Teenage Parenting Program</a></li>
+<li><a href="/Domain/1379">Tuckahoe Elementary School</a></li>
+<li><a href="/Domain/4290">Virtual@APS</a></li>
+<li><a href="/Domain/2021">Wakefield High School</a></li>
+<li><a href="/Domain/2156">Washington-Lee High School</a></li>
+<li><a href="/Domain/1890">Williamsburg Middle School</a></li>
+<li><a href="/Domain/2430">Yorktown High School</a></li>
+</ul>
+</div>
+<div class='sw-dropdown-arrow'></div>
+</div>
+</div>
+<div id='sw-mystart-right'>
+<div id='ui-btn-signin' class='sw-mystart-button signin'><a href="http://www.apsva.us/site/Default.aspx?PageType=7&SiteID=1&IgnoreRedirect=true" title="Sign in to your website."><span>Sign In</span></a></div>
+<div id='sw-mystart-search' class='sw-mystart-nav'>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#sw-search-input').keyup(function(e) {        if (e.keyCode == 13) {
+            SWGoToSearchResultsPageswsearchinput();
+        }
+    });
+    $('#sw-search-input').val($('#swsearch-hid-word').val())});
+function SWGoToSearchResultsPageswsearchinput() {
+window.location.href="http://www.apsva.us/site/Default.aspx?PageType=6&SiteID=1&SearchString=" + $('#sw-search-input').val();
+}
+</script>
+<input id="sw-search-input" type="text" title="Type the word to search for and click Search." placeholder="Search this Site..." />
+<a tabindex="0" id="sw-search-button" onclick="SWGoToSearchResultsPageswsearchinput();"><span><img src="http://www.apsva.us/Static/V2_10_01//globalassets/images/sw-mystart-search.png" alt="Search" /></span></a>
+</div>
+<div class='clear'></div>
+</div>
+</div>
+</div>
+<!-- END - MYSTART BAR -->
+<div id="gb-header" class="noprint">
+	<div id="gb-header-color"></div>
+	<div id="gb-header-inner"></div>
+</div>
+<div id="gb-page">
+	<div id="gb-page-header" class="noprint">
+		<div id="gb-logo">
+			<a href="/aps"><img src="/cms/lib2/VA01000586/Centricity/Template/2/logos/aps.png"/></a>
+		</div>
+		<div id="gb-school">
+			<h1 class="line-one"></h1>
+			<h2 class="line-two"></h2>
+			<h3 class="tagline"></h3>
+		</div>
+		<div id="gb-school-info">
+			<span class="principal-name"></span><br />
+			<span class="address-line-one">1426 N Quincy St</span><br />
+			<span class="address-line-one">Arlington, VA 22207</span><br />
+			<span class="phone">703-228-6000 </span><br />
+			<span class="fax"> </span>
+		</div>
+	
+		<div id="gb-global-outer">
+			<div id="gb-global">
+			<span>Tuesday, June 02, 2015</span><br />
+			<div id="school-globals">
+				<div id="global1"><a href="/emergencyalerts"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/school-global1.png" /></a></div>
+				<div id="global2"><a href="/schooltalk"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/school-global2.png" /></a></div>
+				<div id="global3"><a href="/blackboard"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/school-global3.png" /></a></div>
+			</div>
+			<div id="district-globals">
+				<div id="global4"><a href="/index"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/district-global1.png" /></a></div>
+				<div id="global5"><a href="/schooltalk"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/district-global2.png" /></a></div>
+				<div id="global6"><a href="/contact" target="_blank"><img src="/cms/lib2/VA01000586/Centricity/Template/2/globals/district-global3.png" /></a></div>
+				
+			</div>
+			</div>
+		</div>
+		<div id="gb-channel-list-outer">
+			<div id="sw-channel-list-container">
+<ul id="channel-navigation" class="sw-channel-list">
+<li class="sw-channel-item "><a href="/Page/1"><span>Home</span></a></li>
+<li class="sw-channel-item ">
+<a href="/domain/2881">
+<span>Parents</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="/domain/2881"><span>Parent Resources</span></a></li>
+<li class=""><a href="/site/Default.aspx?PageID=3032"><span>Language Services Registration Center</span></a></li>
+<li class=""><a href="/site/Default.aspx?PageID=1761"><span>English for Speakers of Other Languages</span></a></li>
+</ul>
+</li><li class="sw-channel-item ">
+<a href="/domain/2882">
+<span>Students</span></a>
+</li><li class="sw-channel-item ">
+<a href="/domain/179">
+<span>Staff</span></a>
+</li><li class="sw-channel-item ">
+<a href="/domain/2892">
+<span>Community</span></a>
+</li><li class="sw-channel-item active">
+<a href="/domain/3">
+<span>About Us</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="/domain/3"><span>APS Overview</span></a></li>
+<li class=""><a href="/domain/4"><span>Superintendent&#39;s Office</span></a></li>
+<li class=""><a href="/domain/5"><span>Calendars</span></a></li>
+<li class=""><a href="/domain/6"><span>APS Snapshots</span></a></li>
+<li class=""><a href="/domain/3646"><span>APS Green Scene</span></a></li>
+<li class=""><a href="/domain/4926"><span>#digitalAPS</span></a></li>
+<li class=""><a href="/site/Default.aspx?PageID=25912"><span>News Releases</span></a></li>
+<li class="active"><a href="/domain/8"><span>Publications</span></a></li>
+<li class=""><a href="/domain/9"><span>Departments</span></a></li>
+<li class=""><a href="/domain/10"><span>Schools and Centers</span></a></li>
+<li class=""><a href="/domain/11"><span>Statistics</span></a></li>
+<li class=""><a href="/site/Default.aspx?PageID=1118"><span>Testing</span></a></li>
+<li class=""><a href="/domain/13"><span>ESEA (NCLB)</span></a></li>
+<li class=""><a href="/domain/14"><span>Citizen Advisory Groups</span></a></li>
+<li class=""><a href="/domain/15"><span>Strategic Plan</span></a></li>
+</ul>
+</li><li class="sw-channel-item ">
+<a href="/domain/22">
+<span>Employment</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="/domain/22"><span>Careers @  APS</span></a></li>
+<li class=""><a href="/domain/4800"><span>Current Employees</span></a></li>
+</ul>
+</li><li class="sw-channel-item ">
+<a href="http://www.apsva.us/site/Default.aspx?PageID=1094">
+<span>Instruction</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="http://www.apsva.us/site/Default.aspx?PageID=1094"><span>Department of Instruction</span></a></li>
+<li class=""><a href="/domain/85"><span>For Parents</span></a></li>
+<li class=""><a href="/domain/3857"><span>For Staff</span></a></li>
+<li class=""><a href="/domain/86"><span>Curriculum</span></a></li>
+<li class=""><a href="/domain/87"><span>Programs</span></a></li>
+<li class=""><a href="/domain/88"><span>Career, Technical and Adult Education</span></a></li>
+<li class=""><a href="/domain/89"><span>Early Childhood (Pre-K)</span></a></li>
+<li class=""><a href="/domain/25"><span>Professional Development</span></a></li>
+<li class=""><a href="Default.aspx?PageID=1272"><span>Advisory Council on Instruction (ACI)</span></a></li>
+</ul>
+</li><li class="sw-channel-item ">
+<a href="http://www.apsva.us/site/Default.aspx?PageType=1&SiteID=1&ChannelID=94&DirectoryType=6
+">
+<span>Programs/Services</span></a>
+</li><li class="sw-channel-item ">
+<a href="/domain/167">
+<span>Registration</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="/domain/167"><span>Registration</span></a></li>
+<li class=""><a href="/domain/168"><span>Boundary (Attendance Area) Locator</span></a></li>
+<li class=""><a href="/domain/169"><span>School Options</span></a></li>
+<li class=""><a href="/domain/170"><span>Language Services Registration Center</span></a></li>
+</ul>
+</li><li class="sw-channel-item ">
+<a href="/domain/172">
+<span>School Board</span></a>
+<ul class="sw-channel-dropdown">
+<li class=""><a href="/domain/172"><span>About the School Board</span></a></li>
+<li class=""><a href="/domain/173"><span>School Board Advisory Councils and Committees</span></a></li>
+<li class=""><a href="/domain/175"><span>School Board Members</span></a></li>
+<li class=""><a href="/domain/176"><span>School Board Meeting Agendas, Videos and Minutes</span></a></li>
+<li class=""><a href="/domain/177"><span>School Board Policies</span></a></li>
+<li class=""><a href="/domain/4400"><span>Family and Community Engagement Working Group</span></a></li>
+</ul>
+</li><li class="sw-channel-item "><a href="/Page/2"><span>Calendar</span></a></li>
+</ul><div class='clear'></div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        channelHoverIE();
+        channelTouch();
+    });
+
+    function channelTouch() {
+        // this will change the dropdown behavior when it is touched vs clicked.
+        // channels will be clickable on second click. first click simply opens the menu.
+        $('#channel-navigation > .sw-channel-item > a').on({
+            'touchstart': function (e) {
+                
+                // see if has menu
+                if ($(this).siblings('ul.sw-channel-dropdown').length > 0) {
+                    var button = $(this);
+
+                    // add href as property if not already set
+                    // then remove href attribute
+                    if (!button.prop('linkHref')) {
+                        button.prop('linkHref', button.attr('href'));
+                        button.removeAttr('href');
+                    }
+
+                    // check to see if menu is already open
+                    if ($(this).siblings('ul.sw-channel-dropdown').is(':visible')) {
+                        // if open go to link
+                        window.location.href = button.prop('linkHref');
+                    } 
+
+                } 
+            }
+        });
+    }
+
+
+    
+    function channelHoverIE(){
+		// set z-index for IE7
+		var parentZindex = $('#channel-navigation').parents('div:first').css('z-index');
+		var zindex = (parentZindex > 0 ? parentZindex : 8000);
+		$(".sw-channel-item").each(function(ind) {
+			$(this).css('z-index', zindex - ind);
+			zindex --;
+		});
+	    $(".sw-channel-item").hover(function(){
+	        var subList = $(this).children('ul');
+	        if ($.trim(subList.html()) !== "") {
+		        subList.show();
+		    }
+		    $(this).addClass("hover");
+	    }, function(){
+		    $(".sw-channel-dropdown").hide();
+		    $(this).removeClass("hover");
+	    });
+    }
+
+</script>
+
+
+		</div>
+	</div>
+	<div id="gb-content-outer">
+		<div id="gb-content-left" class="outer column noprint"></div>
+		<div id="sp-content" class="outer column">
+			<div class="sp column one noprint">
+				
+<div class="ui-widget app navigation  pagenavigation custom">
+	<div class="ui-widget-header"></div>
+	<div class="ui-widget-detail">
+		<ul class="page-navigation">
+<li id="pagenavigation-58" class=""><a href="/page/1058" target="_parent"  title="Overview" >Overview</a>
+</li>
+<li id="pagenavigation-5159" class=""><a href="/Page/27125" target="_parent" >NewsTips 2014-15</a>
+</li>
+<li id="pagenavigation-4343" class=""><a href="/Page/23413" target="_parent" >NewsTips 2013-14</a>
+</li>
+<li id="pagenavigation-3848" class=""><a href="/Page/19238" target="_parent" >NewsTips 2012-13</a>
+</li>
+<li id="pagenavigation-3304" class=""><a href="/Page/14964" target="_parent" >NewsTips 2011-12</a>
+</li>
+<li id="pagenavigation-63" class=""><a href="/page/1070" target="_parent"  title="NewsTips 2010-11" >NewsTips 2010-11</a>
+</li>
+<li id="pagenavigation-61" class=""><a href="/page/1068" target="_parent"  title="NewsTips 2009-10" >NewsTips 2009-10</a>
+</li>
+<li id="pagenavigation-60" class=""><a href="/page/1084" target="_parent"  title="NewsTips 2008-09" >NewsTips 2008-09</a>
+</li>
+<li id="pagenavigation-59" class=""><a href="/page/1059" target="_parent"  title="News Tips 2007-08" >News Tips 2007-08</a>
+</li></ul>
+
+	</div>
+	<div class="ui-widget-footer">
+	</div>
+</div>
+			</div>
+			<div class="sp column two">
+				<div id="section-header"><h1>Publications</h1></div>
+				<!-- Start Centricity Content Area --><a id="sw-maincontent" name="sw-maincontent"></a><div id="sw-content-layout-wrapper" class="ui-sp ui-print"><div id="sw-content-layout1"><div id="sw-content-container1" class="ui-column-one region"><div id='pmi-29058'>
+
+
+
+<div id='sw-module-359650'>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var DomainID = '8';
+            var PageID = '26365';
+            var RenderLoc = '0';
+            var MIID = '35965';
+
+            //added to check to make sure moderated content doesn't bleed through the dialog
+            if ($('#dialog-overlay-WindowLargeModal-body.moderateContent').length > 0) {
+                $("#module-content-" + MIID).find(".ui-widget-detail").find(".ui-article").append("<p>&nbsp;</p>");
+            }
+        });
+    </script>
+
+    <script type="text/javascript">$(document).ready(function() {CheckScript('ModuleView');CheckScript('Mustache');
+ });</script>
+    
+    <div id="module-content-35965" >
+<div class="ui-widget app flexpage">
+	<div class="ui-widget-header ui-helper-hidden">
+		
+	</div>
+	
+	<div class="ui-widget-detail">
+		
+<div class="ui-article"><span >
+<h1>APS Annual Report</h1>
+<div>
+<a href="/cms/lib2/VA01000586/Centricity/Domain/8/APS Progress Report Web.pdf"><img style="border: 1px solid currentColor;" title="Annual Report" hspace="10" alt="Annual Report " align="left" src="/cms/lib2/VA01000586/Centricity/Domain/8/APS Progress Report Web.jpg" width="300" height="238" /></a>The&nbsp;<a href="/cms/lib2/VA01000586/Centricity/Domain/8/APS Progress Report.pdf">2013-14 APS Annual Report</a> is available for the community and highlights the achievements of our students. It showcases the great strides that the school division and community have made together in moving APS closer to realizing the goals in the 2011-17 Strategic Plan. Each department highlights programs, provides data, and explains how decisions are linked to the Strategic Plan. The report provides explanations about why the data is important, and how it will continue to guide our school division toward continuous improvement as we move forward.</div>
+<div>&nbsp;</div><a href="/cms/lib2/VA01000586/Centricity/Domain/8/APS Progress Report.pdf"> Read the Annual Report </a><br />
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+Learn more about the highlights of the Annual Report by watching this video about the achievements of APS over the last year.<br />
+<div align="center"><!-- Start of Brightcove Player -->
+<div style="display: none;">
+</div>
+<!--
+By use of this code snippet, I agree to the Brightcove Publisher T and C
+found at https://accounts.brightcove.com/en/terms-and-conditions/.
+-->
+<script language="JavaScript" type="text/javascript" src="http://admin.brightcove.com/js/BrightcoveExperiences.js"></script><object id="myExperience3735920201001" class="BrightcoveExperience">
+<param name="bgcolor" value="#FFFFFF" /><param name="width" value="480" /><param name="height" value="270" /><param name="playerID" value="1257560229001" /><param name="playerKey" value="AQ~~,AAABJJ-pClE~,Ia9m7-1UX4OmIK_AtpI3QceQ0LKttIja" /><param name="isVid" value="true" /><param name="isUI" value="true" /><param name="dynamicStreaming" value="true" /><param name="@videoPlayer" value="3735920201001" /></object>
+<!--
+This script tag will cause the Brightcove Players defined above it to be created as soon
+as the line is read by the browser. If you wish to have the player instantiated only after
+the rest of the HTML is processed and the page load is complete, remove the line.
+-->
+<script type="text/javascript">brightcove.createExperiences();</script><!-- End of Brightcove Player --></div> 
+</span></div> 
+<div class="clear"></div>
+	
+	</div>
+	<div class="ui-widget-footer">
+		
+			
+		
+		<div class="clear"></div>
+	</div>
+</div>
+<input type="hidden" id="hidFullPath" value="http://www.apsva.us/" />
+<input type="hidden" id="hidModuleInstanceID0" value="35965"/>
+<script type="text/javascript">
+$(document).ready(function (){
+});
+function LoadGroupedData(container, MIID, PMI, groupYear, groupMonth, groupBy, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.apsva.us//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=8&PageID=26365&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&EnableQuirksMode=0&ViewID=' + viewToUse + '&Tag=' + tag, container, 2, 'chkSidebar();');
+}
+function LoadData(container, MIID, PMI, flexDataID, groupYear, groupMonth, groupBy, targetView, tag) {
+  if(targetView !== undefined || targetView.Length() == 0){
+  //targetView looks at the hidden Detail View defined in the Builder View.
+      targetView = $('#hid-'+MIID+'-DetailView').val();
+   }
+  GetContent('http://www.apsva.us//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=8&PageID=26365&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&FlexDataID=' + flexDataID + '&GroupYear=' + groupYear + '&GroupMonth=' + groupMonth + '&GroupByField=' + groupBy + '&RenderLoc=0&FromRenderLoc=0&EnableQuirksMode=0&Tag=' + tag + '&ViewID=' + targetView, container, 2, 'chkSidebar();');
+}
+function LoadTaggedData(container, MIID, PMI, tag) {
+  //ViewToUse looks at the hidden Sidebar List View defined in the Builder View.
+  var viewToUse = "";
+    if($('#hid-'+MIID+'-SidebarListView').length > 0){
+      viewToUse = $("#hid-" + MIID + "-SidebarListView").val();
+    };
+  GetContent('http://www.apsva.us//cms/UserControls/ModuleView/ModuleViewRendererWrapper.aspx?DomainID=8&PageID=26365&ModuleInstanceID=' + MIID + '&PageModuleInstanceID=' + PMI + '&RenderLoc=0&FromRenderLoc=0&Tag=' + tag + '&EnableQuirksMode=0&ViewID='+viewToUse, container, 2, 'chkSidebar();');
+}
+</script>
+</div>
+
+</div></div>
+</div><div class="clear"></div></div><div class="swlastmodifeddate">Last Modified  on August 20, 2014</div></div><!-- End Centricity Content Area -->
+			</div>
+			
+		</div>
+		<div id="gb-content-right" class="outer column noprint"></div>
+	</div>
+</div>
+<div id="gb-footer-outside" class="noprint">
+	<div id="gb-footer">
+		<div class="gb footer one">
+			<span class="footer-school-name"></span><br />
+			<span class="address-line-one">1426 N Quincy St</span><br />
+			<span class="address-line-one">Arlington, VA 22207</span><br />
+			
+		</div>
+		<div class="gb footer two">
+		        <span class="principal-name"></span><br />
+			<span class="phone">703-228-6000 </span><br />
+			<span class="fax"> </span>
+		</div>
+		<div 
+		<div class="gb footer three">
+			<a href="mailto:webmaster@apsva.us">Webmaster@apsva.us</a> <br /><a href="/privacypolicy">Privacy Policy</a> <br />All Content© 2011 Arlington Public Schools  
+		</div>
+		<div class="gb footer four">
+			<a href="/"><img src="/cms/lib2/VA01000586/Centricity/Template/2/gb-footer-logo.png" /></a>
+		</div>
+		<div class="footer-equal-access">
+			Arlington Public Schools prohibits discrimination on the basis of race, religion, gender, sexual orientation, national origin, age, disability, pregnancy or marital status. This policy provides equal access to courses and programs, counseling services, physical education and athletics, vocational education, instructional materials and extra-curricular activities. Report violations of this policy to the Assistant Superintendent for Administrative Services, 703-228-6008, or the Assistant Superintendent for Human Resources, 703-228-6110.
+		</div>
+	</div>
+</div>
+<div id="custom-schoolwires-footer" class="noprint">
+	<a href="http://www.schoolwires.com/swcorp/site/default.asp"><img src="/cms/lib2/VA01000586/Centricity/Template/2/schoolwires-logo.png" /></a>
+	<a href="mailto:webmaster@apsva.us"> Questions or Feedback?</a>|<a href="http://www.schoolwires.com/terms"> Terms of Use</a> | <a href="http://www.schoolwires.com/privacy">Schoolwires Privacy Policy(updated)</a>
+	
+	
+</div>
+        
+        
+        
+        <!-- BEGIN - STANDARD FOOTER -->
+<div id='sw-footer-outer'>
+<div id='sw-footer-inner'>
+<div id='sw-footer-left'></div>
+<div id='sw-footer-right'>
+<div id='sw-footer-links'>
+<ul>
+<li><a title='Click to email the primary contact' href='mailto:webmaster@apsva.us'>Questions or Feedback?</a> | </li>
+<li><a href='http://www.schoolwires.com/privacy' target="_blank">Schoolwires Privacy Policy (Updated)</a> | </li>
+<li><a href='http://www.schoolwires.com/terms' target="_blank">Terms of Use</a></li>
+</ul>
+</div>
+<div id='sw-footer-copyright'>Copyright &copy; 2002-2015 Schoolwires, Inc. All rights reserved.</div>
+<div id='sw-footer-logo'><a href='http://www.schoolwires.com' title="This site is powered by Schoolwires Centricity2.">
+<img src='http://www.apsva.us/Static/V2_10_01//GlobalAssets/Images/sw-footer-logo.png'
+ alt="Powered by Schoolwires Centricity2 logo"/>
+</a></div>
+</div>
+</div>
+</div>
+<!-- END - STANDARD FOOTER -->
+<script type="text/javascript">
+   $(document).ready(function(){
+      var beaconURL='http://analytics.schoolwires.com/analytics.asmx/Insert?AccountNumber=5E%2bq5c388cgZBRxjMvWSsQ%3d%3d&SessionID=755a820f-c54c-4406-9ba9-8f8733b3b360&SiteID=1&ChannelID=2&SectionID=8&PageID=26365&HitDate=6%2f2%2f2015+10%3a13%3a04+AM&Browser=Chrome+43.0&OS=Unknown&IPAddress=50.165.65.76';
+      try {
+         $.getJSON(beaconURL + '&jsonp=?', function(myData) {});
+      } catch(err) { 
+         // prevent site error for analytics
+      }
+   });
+</script>
+  
+    <input type="hidden" id="hid-pageid" value="26365" />  
+ 
+
+
+
+<div id='dialog-overlay-WindowMedium-base' class='ui-dialog-overlay-base' ><div id='WindowMedium'  class='ui-dialog-overlay medium' ><div class='ui-dialog-overlay-close' title='Close.' onclick='CloseDialogOverlay("WindowMedium");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowMedium-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowMedium-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowMedium-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMedium-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-WindowSmall-base' class='ui-dialog-overlay-base' ><div id='WindowSmall'  class='ui-dialog-overlay small' ><div class='ui-dialog-overlay-close' title='Close.' onclick='CloseDialogOverlay("WindowSmall");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowSmall-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowSmall-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowSmall-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmall-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-WindowLarge-base' class='ui-dialog-overlay-base' ><div id='WindowLarge'  class='ui-dialog-overlay large' ><div class='ui-dialog-overlay-close' title='Close.' onclick='CloseDialogOverlay("WindowLarge");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowLarge-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowLarge-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowLarge-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLarge-base').appendTo('body');
+ 		
+		
+    });
+</script>
+
+<div id='dialog-overlay-WindowMediumModal-base' class='ui-dialog-overlay-base-modal' ><div id='WindowMediumModal'  class='ui-dialog-overlay medium' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("WindowMediumModal");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowMediumModal-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowMediumModal-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowMediumModal-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowMediumModal-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-WindowSmallModal-base' class='ui-dialog-overlay-base-modal' ><div id='WindowSmallModal'  class='ui-dialog-overlay small' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("WindowSmallModal");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowSmallModal-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowSmallModal-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowSmallModal-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowSmallModal-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-WindowLargeModal-base' class='ui-dialog-overlay-base-modal' ><div id='WindowLargeModal'  class='ui-dialog-overlay large' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("WindowLargeModal");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowLargeModal-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowLargeModal-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowLargeModal-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowLargeModal-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-WindowXLargeModal-base' class='ui-dialog-overlay-base-modal' ><div id='WindowXLargeModal'  class='ui-dialog-overlay xlarge' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("WindowXLargeModal");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-WindowXLargeModal-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-WindowXLargeModal-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-WindowXLargeModal-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-WindowXLargeModal-base').appendTo('body');
+ 		
+		
+    });
+</script>
+
+<div id='dialog-overlay-MyAccountSubscriptionOverlay-base' class='ui-dialog-overlay-base-modal' ><div id='MyAccountSubscriptionOverlay'  class='ui-dialog-overlay medium' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("MyAccountSubscriptionOverlay");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-MyAccountSubscriptionOverlay-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-MyAccountSubscriptionOverlay-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-MyAccountSubscriptionOverlay-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-MyAccountSubscriptionOverlay-base').appendTo('body');
+ 		
+		
+    });
+</script>
+
+<div id='dialog-overlay-InsertOverlay-base' class='ui-dialog-overlay-base-modal' ><div id='InsertOverlay'  class='ui-dialog-overlay large' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("InsertOverlay");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-InsertOverlay-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-InsertOverlay-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-InsertOverlay-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay-base').appendTo('body');
+ 		
+		
+    });
+</script>
+<div id='dialog-overlay-InsertOverlay2-base' class='ui-dialog-overlay-base-modal' ><div id='InsertOverlay2'  class='ui-dialog-overlay large' ><div class='ui-dialog-overlay-close modal' title='Close.' onclick='CloseDialogOverlay("InsertOverlay2");' ></div><div class='ui-dialog-overlay-title-bar' id='dialog-overlay-InsertOverlay2-title-bar' ></div><div class='ui-dialog-overlay-body' id='dialog-overlay-InsertOverlay2-body' ></div><div class='ui-dialog-overlay-footer' id='dialog-overlay-InsertOverlay2-footer' ></div></div></div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#dialog-overlay-InsertOverlay2-base').appendTo('body');
+ 		
+		
+    });
+</script>
+
+
+    <script type="text/javascript">
+
+		$(document).ready(function() {
+			removeBrokenImages();
+			checkSidebar();
+			RemoveCookie();
+			
+			$('.navigation li.collapsible').each(function() {
+			    if ($(this).find('ul').length == 0) {
+			        $(this).removeClass('collapsible');
+			    } 
+			});
+			
+			// find page nav state cookie and add open chevron
+			var arrValues = GetCookie('SWPageNavState').split('~');
+
+			$.each(arrValues, function() {
+				if (this != '') {
+					$('#' + this).addClass('collapsible').prepend("<div class='bullet collapsible' />");
+				}
+			});
+
+			// find remaining sub menus and add closed chevron and close menu
+			$('.navigation li > ul').each(function() {
+			    var list = $(this);
+			    
+			    if (list.parent().hasClass('active') && !list.parent().hasClass('collapsible')) {
+			        // open sub for currently selected page                    
+			        list.parent().addClass('collapsible').prepend("<div class='bullet collapsible' />");
+			    } else {
+			        if (list.parent().hasClass('collapsible') && !list.siblings('div').hasClass('collapsible')) {
+			            // open sub for page with auto expand
+			            list.siblings('div.expandable').remove();
+			            list.parent().prepend("<div class='bullet collapsible' />");
+			        }
+			    }
+
+				if (!list.siblings('div').hasClass('collapsible')) {
+				    // keep all closed that aren't already set to open
+					list.parent().addClass('expandable').prepend("<div class='bullet expandable' />");
+					ClosePageSubMenu(list.parent());
+				} else {
+					OpenPageSubMenu(list.parent());
+				}
+			});
+			
+			// remove bullet from hierarchy if no-bullet set
+			$('.navigation li.collapsible').each(function() {
+			    if ($(this).hasClass('no-bullet')) {
+			        if (!$(this).hasClass('navigationgroup')) {$(this).removeClass('collapsible');}
+			        $(this).children('div.collapsible').remove();
+			    }
+			});
+
+			$('.navigation li.expandable').each(function() {
+			    if ($(this).hasClass('no-bullet')) {
+			        if (!$(this).hasClass('navigationgroup')) {$(this).removeClass('expandable');}
+			        $(this).children('div.expandable').remove();
+			    }
+			});
+			
+			$('.navigation li:not(.collapsible,.expandable,.no-bullet)').each(function() {
+			    $(this).prepend("<div class='bullet' />");
+			});
+		
+			$('.navigation li.active').parents('ul').each(function() {
+                if (!$(this).hasClass('page-navigation')) {
+                    OpenPageSubMenu($(this).parent());
+                }
+            });
+		
+			// set click event for chevron
+            $(document).on('click', '.navigation div.collapsible', function() {
+				ClosePageSubMenu($(this).parent());
+			});
+
+            $(document).on('click', '.navigation div.expandable', function() {
+				OpenPageSubMenu($(this).parent());
+            });
+            
+            // set navigation grouping links
+            $(document).on('click', '.navigationgroup.collapsible > a', function() {
+                ClosePageSubMenu($(this).parent());
+            });
+
+            $(document).on('click', '.navigationgroup.expandable > a', function() {
+                OpenPageSubMenu($(this).parent());
+            });				
+			
+			//SW MYSTART DROPDOWNS
+            $(document).on('click', '.sw-mystart-dropdown', function() {
+                $(this).children(".sw-dropdown").css("display", "block");
+			});
+
+		    $(".sw-mystart-dropdown").hover(function() {}, function() {
+		        $(this).children(".sw-dropdown").hide();
+		        $(this).blur();
+            });
+
+		    //SW ACCOUNT DROPDOWN
+		    $(document).on('click', '#sw-mystart-account', function() {
+		        $(this).children("#sw-myaccount-list").show();
+		        $(this).addClass("clicked-state");
+		    });
+
+			$("#sw-mystart-account, #sw-myaccount-list").hover(function() {}, function() {
+				$(this).children("#sw-myaccount-list").hide();
+				$(this).removeClass("clicked-state");
+				$("#sw-myaccount").blur();
+			});
+			   
+		   // set hover class for page and section navigation
+		   $('.ui-widget.app.pagenavigation, .ui-widget.app.sectionnavigation').find('li > a').hover(function() {
+		        $(this).addClass('hover');
+		   }, function() {
+		        $(this).removeClass('hover');
+		   });
+
+		}); // end document ready
+		
+		function OpenPageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+			    li.removeClass('expandable').addClass('collapsible');
+			    li.find('div:first').removeClass('expandable').addClass('collapsible');	
+			    li.find('ul:first').show();
+
+			    PageNavigationStateCookie();
+            }
+		}
+		
+		function ClosePageSubMenu(li) {
+            if (li.prop('tagName').toLowerCase() == "li") {
+			    li.removeClass('collapsible').addClass('expandable');
+			    li.find('div:first').removeClass('collapsible').addClass('expandable');	 
+			    li.find('ul:first').hide();
+
+			    PageNavigationStateCookie();
+            }
+		}
+		
+		function PageNavigationStateCookie() {
+		    var strCookie = "";
+
+			$('.pagenavigation li > ul').each(function() {
+			    var item = $(this).parent('li');
+				if (item.hasClass('collapsible') && !item.hasClass('no-bullet')){
+					strCookie += $(this).parent().attr('id') + '~';
+				}
+            });
+
+			SetCookie('SWPageNavState', strCookie);
+		}
+		
+		function checkSidebar(){
+		   $(".ui-widget-sidebar").each(function() {
+			   if($.trim($(this).html()) != ""){
+				   $(this).show();
+				   $(this).siblings(".ui-widget-detail").addClass("with-sidebar");
+			   } 
+		   });
+        }
+
+		function removeBrokenImages(){
+		   //REMOVES ANY BROKEN IMAGES
+		    $("span.img img").each(function() {
+		        if ($(this).attr("src") !== undefined) {
+		            $(this).parent().parent().show();
+		            $(this).parent().parent().siblings().addClass("has-thumb");
+		        } 
+		    });
+		}
+
+		function LoadEventDetailUE(moduleInstanceID, eventDateID, userRegID, isEdit) {
+		    (userRegID === undefined ? userRegID = 0 : '');
+		    (isEdit === undefined ? isEdit = false : '');
+		    OpenDialogOverlay("WindowMediumModal", { LoadType: "U", LoadURL: "http://www.apsva.us//site/UserControls/Calendar/EventDetailWrapper.aspx?ModuleInstanceID=" + moduleInstanceID + "&EventDateID=" + eventDateID + "&UserRegID=" + userRegID + "&IsEdit=" + isEdit });
+		}
+
+		function RemoveCookie() {
+		    // There are no sub page            
+		    if ($('.pagenavigation li li').length == 0) {
+		        //return false;
+		        PageNavigationStateCookie();
+		    }
+		}
+	</script>
+	
+	<script type="text/javascript">
+
+	    function AddOffCanvasMenuHeightForSiteNav() {
+	        var sitenavulHeight = 0;
+
+	        if ($('#sw-pg-sitenav-ul').length > 0) {
+	            sitenavulHeight = parseInt($("#sw-pg-sitenav-ul").height());
+	        }
+
+	        var swinnerwrapHeight = 0;
+
+	        if ($('#sw-inner-wrap').length > 0) {
+	            swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+	        }
+
+	        // 360px is abount 5 li height
+	        if (sitenavulHeight + 360 >= swinnerwrapHeight) {
+	            $("#sw-inner-wrap").height(sitenavulHeight + 360);
+	        }
+	    }
+
+	    function AddOffCanvasMenuHeightForSelectSchool() {
+	        var selectschoolulHeight = 0;
+
+	        if ($('#sw-pg-selectschool-ul').length > 0) {
+	            selectschoolulHeight = parseInt($("#sw-pg-selectschool-ul").height());
+	        }
+
+	        var swinnerwrapHeight = 0;
+
+	        if ($('#sw-inner-wrap').length > 0) {
+	            swinnerwrapHeight = parseInt($("#sw-inner-wrap").height());
+	        }
+
+	        // 360px is abount 5 li height
+	        if (selectschoolulHeight + 360 >= swinnerwrapHeight) {
+	            $("#sw-inner-wrap").height(selectschoolulHeight + 360);
+	        }
+	    }
+
+	    $(document).ready(function() {
+	        if ($("#sw-pg-sitenav-a").length > 0) {
+                $(document).on('click', '#sw-pg-sitenav-a', function() {
+	                if ($("#sw-pg-sitenav-ul").hasClass('sw-pgmenu-closed')) {
+	                    AddOffCanvasMenuHeightForSiteNav();
+
+	                    $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+	                    $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-closed');
+	                    $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-open');
+	                } else {
+	                    $("#sw-pg-sitenav-ul").removeClass('sw-pgmenu-open');
+	                    $("#sw-pg-sitenav-ul").addClass('sw-pgmenu-closed');
+	                }
+	            });
+
+                $(document).on('click', '#sw-pg-selectschool-a', function() {
+	                if ($("#sw-pg-selectschool-ul").hasClass('sw-pgmenu-closed')) {
+	                    AddOffCanvasMenuHeightForSelectSchool();
+
+	                    $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+	                    $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-closed');
+	                    $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-open');
+	                } else {
+	                    $("#sw-pg-selectschool-ul").removeClass('sw-pgmenu-open');
+	                    $("#sw-pg-selectschool-ul").addClass('sw-pgmenu-closed');
+	                }
+	            });
+
+                $(document).on('click', '#sw-pg-myaccount-a', function() {
+	                if ($("#sw-pg-myaccount-ul").hasClass('sw-pgmenu-closed')) {
+	                    $("ul.sw-pgmenu-toplevel").removeClass('sw-pgmenu-open').addClass('sw-pgmenu-closed');
+	                    $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-closed');
+	                    $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-open');
+	                } else {
+	                    $("#sw-pg-myaccount-ul").removeClass('sw-pgmenu-open');
+	                    $("#sw-pg-myaccount-ul").addClass('sw-pgmenu-closed');
+	                }
+	            });
+
+                $(document).on('click', '.pg-list-bullet', function() {
+	                $(this).prev().toggle();
+
+	                if ($(this).hasClass('closed')) {
+	                    AddOffCanvasMenuHeightForSiteNav();
+
+	                    $(this).removeClass('closed');
+	                    $(this).addClass('open');
+	                } else {
+	                    $(this).removeClass('open');
+	                    $(this).addClass('closed');
+	                }
+	            });
+
+                $(document).on('mouseover', '#sw-pg-selectschool', function() {
+	                $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseout').addClass('sw-pg-selectschool-firstli-mouseover');
+	                $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseover').removeClass('sw-pg-selectschool-firstli-a-mouseout');
+	            });
+
+                $(document).on('mouseout', '#sw-pg-selectschool', function() {
+	                $("#sw-pg-selectschool-firstli").removeClass('sw-pg-selectschool-firstli-mouseover').addClass('sw-pg-selectschool-firstli-mouseout');
+	                $("#sw-pg-selectschool-firstli a").addClass('sw-pg-selectschool-firstli-a-mouseout').removeClass('sw-pg-selectschool-firstli-a-mouseover');
+	            });
+
+                $(document).on('mouseover', '#sw-pg-myaccount', function() {
+	                $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseout').addClass('sw-pg-myaccount-firstli-mouseover');
+	                $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseover').removeClass('sw-pg-myaccount-firstli-a-mouseout');
+	            });
+
+                $(document).on('mouseout', '#sw-pg-myaccount', function() {
+	                $("#sw-pg-myaccount-firstli").removeClass('sw-pg-myaccount-firstli-mouseover').addClass('sw-pg-myaccount-firstli-mouseout');
+	                $("#sw-pg-myaccount-firstli a").addClass('sw-pg-myaccount-firstli-a-mouseout').removeClass('sw-pg-myaccount-firstli-a-mouseover');
+	            });
+
+                $(document).on('mouseover', '#sw-pg-sitenav', function() {
+	                $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseout').addClass('sw-pg-sitenav-firstli-mouseover');
+	                $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseover').removeClass('sw-pg-sitenav-firstli-a-mouseout');
+	            });
+
+                $(document).on('mouseout', '#sw-pg-sitenav', function() {
+	                $("#sw-pg-sitenav-firstli").removeClass('sw-pg-sitenav-firstli-mouseover').addClass('sw-pg-sitenav-firstli-mouseout');
+	                $("#sw-pg-sitenav-firstli a").addClass('sw-pg-sitenav-firstli-a-mouseout').removeClass('sw-pg-sitenav-firstli-a-mouseover');
+	            });
+
+                $(document).on('mouseover', '#sw-pg-district', function() {
+	                $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseout').addClass('sw-pg-district-firstli-mouseover');
+	                $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseover').removeClass('sw-pg-district-firstli-a-mouseout');
+	            });
+
+                $(document).on('mouseout', '#sw-pg-district', function() {
+	                $("#sw-pg-district-firstli").removeClass('sw-pg-district-firstli-mouseover').addClass('sw-pg-district-firstli-mouseout');
+	                $("#sw-pg-district-firstli a").addClass('sw-pg-district-firstli-a-mouseout').removeClass('sw-pg-district-firstli-a-mouseover');
+	            });
+	        }
+	    });	
+
+
+</script>
+    
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js' type='text/javascript'></script>
+    <script src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/min/SW-UI.min.js" type='text/javascript'></script>
+    <script src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/Initialize.js" type='text/javascript'></script>
+    <script src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/min/swfobject.min.js" type="text/javascript"></script>
+    <script src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/min/jquery.ajaxupload.min.js" type="text/javascript"></script> 
+
+<!-- Begin swuc.CheckScript -->
+  <script type="text/javascript" src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/ThirdParty/json2.js"></script>
+  <script type="text/javascript" src="http://www.apsva.us/Static/V2_10_01/GlobalAssets/Scripts/CheckScript.js"></script>
+<!-- End swuc.CheckScript -->
+
+
+<!-- Server Load Time (06): 0.1093764 Seconds -->
+
+
+
+<!-- off-canvas menu enabled-->
+
+
+</body>
+</html>
